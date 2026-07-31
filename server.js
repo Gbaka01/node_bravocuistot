@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"
 import dotenv from "dotenv";
 import db from './db/db.js';
 import userRoutes from './routes/user.route.js';
@@ -7,7 +8,7 @@ import noteRoutes from './routes/note.route.js';
 import ingredientRoutes from './routes/ingredient.route.js';
 import categorieRoutes from './routes/categorie.route.js';
 import moderationRoutes from './routes/moderation.route.js';
-import cors from "cors"
+
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 dotenv.config();
