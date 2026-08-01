@@ -14,14 +14,6 @@ const populateOptions = [
     path: "category",
     select: "description2",
   },
-  {
-    path: "ingredients",
-    select: "description",
-  },
-  {
-    path: "moderatedBy",
-    select: "nom prenom email",
-  },
 ];
 
 // Toutes les recettes pour la modération

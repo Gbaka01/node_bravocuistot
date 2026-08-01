@@ -30,6 +30,24 @@ const recetteSchema = new mongoose.Schema(
       ref: "Categorie",
       required: true,
     },
+    status: {
+  type: String,
+  enum: ["pending", "approved", "rejected"],
+  default: "pending",
+},
+moderationReason: {
+  type: String,
+  default: null,
+},
+moderatedBy: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "User",
+  default: null,
+},
+moderatedAt: {
+  type: Date,
+  default: null,
+},
   },
   {
     timestamps: true,
