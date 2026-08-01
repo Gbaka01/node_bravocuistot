@@ -6,6 +6,9 @@ export default function userValidation(body){
       prenom: joi.string(),
       password: joi.string().required(),
       email: joi.string().email().required(),
+       role: joi.string()
+      .valid("user", "moderateur", "admin")
+      .default("user"),
     })
       const userLawLogin = joi.object({
       email : joi.string().email().required(),
@@ -17,6 +20,9 @@ export default function userValidation(body){
       prenom: joi.string(),
       password: joi.string(),
       email: joi.string(),
+       role: joi.string()
+      .valid("user", "moderateur", "admin")
+      .default("user"),
     })
 
     return {
