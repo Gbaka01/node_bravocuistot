@@ -47,7 +47,7 @@ moderatedBy: {
 moderatedAt: {
   type: Date,
   default: null,
-},
+}
   },
   {
     timestamps: true,
