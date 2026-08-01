@@ -5,9 +5,9 @@ import auth from "../middlewares/auth.js";
 const router = Router()
 
 router.post('/new',auth,  createNote)
-router.get('/all',auth,  getAllNotes)
-router.get('/:id',auth,  getNoteById)
-router.put('/:id',auth,  updateNote)
+router.get('/all',  getAllNotes)
+router.get('/:id',  getNoteById)
+router.put('/:id',  updateNote)
 router.delete('/:id',auth,  deleteNote)
 
 export default router
