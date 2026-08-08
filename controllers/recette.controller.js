@@ -96,24 +96,41 @@ const createRecette = async (req, res) => {
 };
 
 // Récupérer toutes les recettes
+
+
 const getAllRecettes = async (req, res) => {
   try {
-    const recettes = await Recette.find()
-      .populate(populateOptions)
-      .lean();
+    const search = String(req.query.search || "").trim();
+
+    const filter = {};
+
+    if (search) {
+      // Évite que certains caractères soient interprétés comme une RegExp
+      const safeSearch = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+      filter.$or = [
+        { fiche: { $regex: safeSearch, $options: "i" } },
+        { description3: { $regex: safeSearch, $options: "i" } },
+      ];
+    }
+
+    const recettes = await Recette.find(filter)
+      .populate("author", "nom prenom email")
+      .populate("category", "description2")
+      .sort({ createdAt: -1 });
 
     return res.status(200).json({
       recettes,
+      total: recettes.length,
     });
   } catch (error) {
-    console.error("Erreur getAllRecettes :", error);
+    console.error("Erreur recherche :", error);
 
     return res.status(500).json({
-      message: "Erreur serveur",
-      error: error.message,
+      message: "Impossible de rechercher les recettes",
     });
   }
-};
+}
 
 // Récupérer les recettes de l'utilisateur connecté
 const getMyRecettes = async (req, res) => {
