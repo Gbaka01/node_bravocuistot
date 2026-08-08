@@ -154,6 +154,11 @@ const updateRecetteByModerator = async (req, res) => {
     if (req.file) {
       recette.image = `/uploads/${req.file.filename}`;
     }
+    recette.fiche = req.body.fiche;
+recette.description3 = req.body.description3;
+recette.status = req.body.status;
+recette.moderationReason =
+  req.body.moderationReason || "";
 
     await recette.save();
     await recette.populate(populateOptions);
